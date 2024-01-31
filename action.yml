@@ -1,8 +1,8 @@
 name: "ZeroTier"
 description: "Connect your Github Action workflow to ZeroTier"
 branding:
-  icon: 'globe'
-  color: 'gray-dark'
+  icon: "globe"
+  color: "gray-dark"
 
 on:
   workflow_call:
@@ -20,7 +20,7 @@ inputs:
     default: "https://my.zerotier.com/api/v1"
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: zerotier
       uses: zerotier/github-action/util/post@main
@@ -46,7 +46,7 @@ runs:
           echo "⏁  Authorizing Runner to ZeroTier network"
           MAX_RETRIES=10
           RETRY_COUNT=0
-          
+
           while ! curl -s -X POST \
           -H "Authorization: token ${{ inputs.auth_token }}" \
           -H "Content-Type: application/json" \
@@ -59,11 +59,11 @@ runs:
                   echo "Reached maximum number of retries ($MAX_RETRIES). Exiting..."
                   exit 1
               fi
-          
+
               echo "Authorization failed. Retrying in 2 seconds... (Attempt $RETRY_COUNT of $MAX_RETRIES)"
               sleep 2
           done
-          
+
           echo "Member authorized successfully."
           echo "⏁  Joining ZeroTier Network ID: ${{ inputs.network_id }}"
           case $(uname -s) in
