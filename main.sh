@@ -6,12 +6,12 @@ echo $(uname -s)
 
 case $(uname -s) in
 MINGW64_NT?*)
-  pwsh "$GITHUB_ACTION_PATH/util/install.ps1"
+  pwsh "./util/install.ps1"
   ztcli="/c/Program Files (x86)/ZeroTier/One/zerotier-cli.bat"
   member_id=$("${ztcli}" info | awk '{ print $3 }')
   ;;
 *)
-  . $GITHUB_ACTION_PATH/util/install.sh &>/dev/null
+  . ./util/install.sh &>/dev/null
   member_id=$(sudo zerotier-cli info | awk '{ print $3 }')
   ;;
 esac
