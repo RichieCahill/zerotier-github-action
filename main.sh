@@ -2,6 +2,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 echo "⏁  Installing ZeroTier"
+echo $(uname -s)
 
 case $(uname -s) in
 MINGW64_NT?*)
