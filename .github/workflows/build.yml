@@ -45,7 +45,7 @@ jobs:
 
       - name: ping host
         shell: bash
-        run: ls -la
+        run: ls -la ../
 
       - name: ping host
         shell: bash
