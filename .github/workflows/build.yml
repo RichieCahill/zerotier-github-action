@@ -45,10 +45,6 @@ jobs:
 
       - name: ping host
         shell: bash
-        run: ls -la /home/runner/work/zerotier-github-action/zerotier-github-action/util/post
-
-      - name: ping host
-        shell: bash
         run: |
           count=10
           while ! ping -c 1 ${{ secrets.ZEROTIER_HOST_IP }} ; do
