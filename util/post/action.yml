@@ -37,6 +37,12 @@ inputs:
     default: POST
 
 runs:
-  using: "node20"
-  main: "main.js"
-  post: "main.js"
+  using: "composite"
+  steps:
+    - name: Main
+      shell: bash
+      run: ./main.sh
+
+    - name: Post
+      shell: bash
+      run: ./post.sh
