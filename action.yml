@@ -25,6 +25,7 @@ runs:
     - name: zerotier
       uses: ./util/post
       env:
+        ACTION_PATH: ${{ github.action_path }}
         API_URL: ${{ inputs.api_url }}
         AUTH_TOKEN: ${{ inputs.auth_token }}
         NETWORK_ID: ${{ inputs.network_id }}

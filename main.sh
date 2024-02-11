@@ -5,12 +5,12 @@ echo "⏁  Installing ZeroTier"
 
 case $(uname -s) in
 MINGW64_NT?*)
-  pwsh "./util/install.ps1"
+  pwsh "$ACTION_PATH/util/install.ps1"
   ztcli="/c/Program Files (x86)/ZeroTier/One/zerotier-cli.bat"
   member_id=$("${ztcli}" info | awk '{ print $3 }')
   ;;
 *)
-  . ./util/install.sh &>/dev/null
+  . $ACTION_PATH/util/install.sh &>/dev/null
   member_id=$(sudo zerotier-cli info | awk '{ print $3 }')
   ;;
 esac
