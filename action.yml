@@ -1,4 +1,4 @@
-name: "ZeroTier"
+name: "RichieCahillZeroTier"
 description: "Connect your Github Action workflow to ZeroTier"
 branding:
   icon: "globe"
