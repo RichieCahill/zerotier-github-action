@@ -1,6 +1,15 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+if [[ ! -v STATE_POST ]]; then
+  echo "DEPLOY_ENV is not set"
+elif [[ -z "$STATE_POST" ]]; then
+  echo "STATE_POST is set to the empty string"
+else
+  echo "STATE_POST has the value: $STATE_POST"
+fi
+
+
 case $(uname -s) in
 MINGW64_NT?*)
   ztcli="/c/Program Files (x86)/ZeroTier/One/zerotier-cli.bat"

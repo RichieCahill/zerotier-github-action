@@ -4,6 +4,14 @@ IFS=$'\n\t'
 echo "⏁  Installing ZeroTier"
 echo $(uname -s)
 
+if [[ ! -v STATE_POST ]]; then
+  echo "DEPLOY_ENV is not set"
+elif [[ -z "$STATE_POST" ]]; then
+  echo "STATE_POST is set to the empty string"
+else
+  echo "STATE_POST has the value: $STATE_POST"
+fi
+
 case $(uname -s) in
 MINGW64_NT?*)
   pwsh "./util/install.ps1"
