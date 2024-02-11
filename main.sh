@@ -4,7 +4,7 @@ IFS=$'\n\t'
 echo "⏁  Installing ZeroTier"
 echo $(uname -s)
 
-if ![[ ! -v STATE_POST ]]; then
+if [[ -v STATE_POST ]]; then
   exit 0
 fi
 
