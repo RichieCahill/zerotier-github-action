@@ -29,5 +29,5 @@ runs:
         AUTH_TOKEN: ${{ inputs.auth_token }}
         NETWORK_ID: ${{ inputs.network_id }}
       with:
-        main: ls -la
-        post: ./post.sh
+        main: ls -la ${{ github.action_path }}
+        post: ${{ github.action_path }}/post.sh
