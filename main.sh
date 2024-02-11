@@ -17,7 +17,7 @@ MINGW64_NT?*)
 esac
 
 echo "⏁  Authorizing Runner to ZeroTier network"
-MAX_RETRIES=10
+MAX_RETRIES=100
 RETRY_COUNT=0
 
 while ! curl -s -X POST \
