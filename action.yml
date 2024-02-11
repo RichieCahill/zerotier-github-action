@@ -23,7 +23,7 @@ runs:
   using: "composite"
   steps:
     - name: zerotier
-      uses: zerotier/github-action/util/post@main
+      uses: ./util/post
       env:
         AUTH_TOKEN: ${{ inputs.auth_token }}
         API_URL: ${{ inputs.api_url }}
