@@ -12,7 +12,7 @@ case $(uname -s) in
 esac
 
 echo "⏁  Removing Runner from ZeroTier network"
-curl -i -s -X DELETE -H "Authorization: token ${{ inputs.auth_token }}" "${{ inputs.api_url }}/network/${{ inputs.network_id }}/member/${member_id}" > /tmp/api_delete_output.txt
+curl -i -s -X DELETE -H "Authorization: token $AUTH_TOKEN" "$API_URL/network/$NETWORK_ID/member/${member_id}" > /tmp/api_delete_output.txt
 STATUS_CODE=$(cat /tmp/api_delete_output.txt | grep 'HTTP/' | awk '{print $2}')
 
 if [[ $STATUS_CODE -ge 400 && $STATUS_CODE -le 599 ]]; then

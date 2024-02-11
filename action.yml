@@ -24,6 +24,10 @@ runs:
   steps:
     - name: zerotier
       uses: zerotier/github-action/util/post@main
+      env:
+        AUTH_TOKEN: ${{ inputs.auth_token }}
+        API_URL: ${{ inputs.api_url }}
+        NETWORK_ID: ${{ inputs.network_id }}
       with:
         main: ./main.sh
 

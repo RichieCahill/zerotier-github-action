@@ -5,12 +5,12 @@ echo "⏁  Installing ZeroTier"
 
 case $(uname -s) in
   MINGW64_NT?*)
-    pwsh "${{ github.action_path }}/util/install.ps1"
+    pwsh "$GITHUB_ACTION_PATH/util/install.ps1"
     ztcli="/c/Program Files (x86)/ZeroTier/One/zerotier-cli.bat"
     member_id=$("${ztcli}" info | awk '{ print $3 }')
     ;;
   *)
-    . ${{ github.action_path }}/util/install.sh &>/dev/null
+    . $GITHUB_ACTION_PATH/util/install.sh &>/dev/null
     member_id=$(sudo zerotier-cli info | awk '{ print $3 }')
   ;;
 esac
@@ -20,10 +20,10 @@ MAX_RETRIES=10
 RETRY_COUNT=0
 
 while ! curl -s -X POST \
--H "Authorization: token ${{ inputs.auth_token }}" \
+-H "Authorization: token $AUTH_TOKEN" \
 -H "Content-Type: application/json" \
 -d '{"name":"Zerotier GitHub Member '"${GITHUB_SHA::7}"'", "description": "Member created by '"${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"'", "config":{"authorized":true}}' \
-"${{ inputs.api_url }}/network/${{ inputs.network_id }}/member/${member_id}" | grep '"authorized":true'; 
+"$API_URL/network/$NETWORK_ID/member/${member_id}" | grep '"authorized":true'; 
 do 
     RETRY_COUNT=$((RETRY_COUNT+1))
     
@@ -37,14 +37,14 @@ do
 done
 
 echo "Member authorized successfully."
-echo "⏁  Joining ZeroTier Network ID: ${{ inputs.network_id }}"
+echo "⏁  Joining ZeroTier Network ID: $NETWORK_ID"
 case $(uname -s) in
   MINGW64_NT?*)
-    "${ztcli}" join ${{ inputs.network_id }}
-    while ! "${ztcli}" listnetworks | grep ${{ inputs.network_id }} | grep OK ; do sleep 0.5 ; done
+    "${ztcli}" join $NETWORK_ID
+    while ! "${ztcli}" listnetworks | grep $NETWORK_ID | grep OK ; do sleep 0.5 ; done
     ;;
   *)
-    sudo zerotier-cli join ${{ inputs.network_id }}
-    while ! sudo zerotier-cli listnetworks | grep ${{ inputs.network_id }} | grep OK ; do sleep 0.5 ; done
+    sudo zerotier-cli join $NETWORK_ID
+    while ! sudo zerotier-cli listnetworks | grep $NETWORK_ID | grep OK ; do sleep 0.5 ; done
     ;;
 esac
