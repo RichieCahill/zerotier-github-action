@@ -38,7 +38,7 @@ jobs:
     if: ${{ github.ref_name }} == "main"
     steps:
       - name: zerotier
-        uses: RichieCahill/zerotier-github-action@main
+        uses: RichieCahill/zerotier-github-action@test
         with:
           network_id: ${{ secrets.ZEROTIER_NETWORK_ID }}
           auth_token: ${{ secrets.ZEROTIER_CENTRAL_TOKEN }}
